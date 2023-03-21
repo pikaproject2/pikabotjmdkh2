@@ -1,1 +1,1 @@
-worker: bash start.sh --port=$PORT
+worker: bash start.sh --bind :$PORT
