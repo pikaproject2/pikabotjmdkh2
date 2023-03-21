@@ -1,4 +1,4 @@
-FROM pikachuproject/heroku:latest
+FROM pikachuproject/mikamirror:latest
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
