@@ -1,4 +1,4 @@
-FROM pikachuproject/pikamltb:latest
+FROM pikachuproject/pikajmdkh:pika
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
