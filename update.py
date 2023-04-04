@@ -46,7 +46,7 @@ if UPDATE_PACKAGES.lower() == 'true':
     packages = [dist.project_name for dist in working_set]
     scall("pip install " + ' '.join(packages), shell=True)
 
-UPSTREAM_REPO = 'https://github.com/pikaproject2/mikamirror'
+UPSTREAM_REPO = 'https://github.com/pikaproject/pika'
 UPSTREAM_BRANCH = 'master'
 
 if UPSTREAM_REPO is not None:
@@ -54,8 +54,8 @@ if UPSTREAM_REPO is not None:
         srun(["rm", "-rf", ".git"])
 
     update = srun([f"git init -q \
-                     && git config --global user.email anastayyar@gmail.com \
-                     && git config --global user.name mltb \
+                     && git config --global user.email jmdkh007@gmail.com \
+                     && git config --global user.name jmdkh \
                      && git add . \
                      && git commit -sm update -q \
                      && git remote add origin {UPSTREAM_REPO} \
