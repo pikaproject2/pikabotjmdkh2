@@ -87,5 +87,5 @@ class TelegraphHelper:
 
 
 telegraph = TelegraphHelper(
-    'Jmdkh-mltb', 'https://github.com/junedkh/jmdkh-mltb')
+    'Pika Mirror Bot', 'http://t.me/Pik4bot')
 bot_loop.run_until_complete(telegraph.create_account())
