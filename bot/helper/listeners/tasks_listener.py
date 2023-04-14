@@ -370,7 +370,7 @@ class MirrorLeechListener:
             msg = f'<b>_____《🐱 Pik4Bot 🐱》_____</b>\n\n<b>☞ Name</b>: <code>{escape(name)}</code>\n<b>☞ Size</b>: {get_readable_file_size(size)}'
             msg += f'\n<b>☞ Total Files</b>: {folders}'
             msg += f"\n<b>☞ Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
-            if typ != 0:
+            if mime_type != 0:
                 msg += f'\n<b>☞ Corrupted Files</b>: {mime_type}'
             #msg += f"\n<b>Upload</b>: {self.extra_details['mode']}"
             msg += f'\n\n<b>☞ Leech_By</b>: {self.tag}'
@@ -416,7 +416,7 @@ class MirrorLeechListener:
             else:
                 msg = f'<b>_____《🐱 Pik4Bot 🐱》_____</b>\n\n<b>☞ Name</b>: <code>{escape(name)}</code>\n<b>☞ Size</b>: {get_readable_file_size(size)}'
             msg += f'\n<b>☞ Type: </b>{mime_type}'
-            if typ == "Folder":
+            if mime_type == "Folder":
                 msg += f'\n<b>☞ SubFolders: </b>{folders}'
                 msg += f'\n<b>☞ Files: </b>{files}'
             #msg += f"\n<b>Upload</b>: {self.extra_details['mode']}"
