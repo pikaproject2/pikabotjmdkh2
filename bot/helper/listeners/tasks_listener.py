@@ -448,10 +448,10 @@ class MirrorLeechListener:
                         if mime_type == "Folder":
                             share_url += '/'
                             share_url = await sync_to_async(short_url, share_url)
-                            buttons.ubutton("📁 Index Link", share_url)
+                            buttons.ubutton("📁 Google Index", share_url)
                         else:
                             share_url = await sync_to_async(short_url, share_url)
-                            buttons.ubutton("⚡ Index Link", share_url)
+                            buttons.ubutton("⚡ Google Index", share_url)
                             if config_dict['VIEW_LINK']:
                                 share_urls = f'{INDEX_URL}/{url_path}?a=view'
                                 share_urls = await sync_to_async(short_url, share_urls)
