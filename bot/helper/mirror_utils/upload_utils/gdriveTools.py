@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from bot.helper.ext_utils.telegraph_helper import telegraph
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 from tenacity import (RetryError, retry, retry_if_exception_type,
                       stop_after_attempt, wait_exponential)
