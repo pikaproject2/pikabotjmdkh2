@@ -642,10 +642,13 @@ class GoogleDriveHelper:
         if msg != '':
             telegraph_content.append(msg)
 
-        return telegraph_content, contents_no
+        if not telegraph_content:
+            return "", None
 
-        path = [async_to_sync(telegraph.create_page, title='Mirror-Leech-Bot Drive Search',
+        path = [async_to_sync(telegraph.create_page, title='Pik4bot Drive Search',
                 content=content)["path"] for content in telegraph_content]
+        if len(path) > 1:
+            async_to_sync(telegraph.edit_telegraph, path, telegraph_content)
 
     def count(self, link):
         try:
