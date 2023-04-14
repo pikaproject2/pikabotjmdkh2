@@ -471,7 +471,7 @@ class MirrorLeechListener:
                         buttons.ubutton("☁️ Google Drive", link, 'header')
                     await sendMessage(self.logMessage, msg, buttons.build_menu(2))
             else:
-                             msg += f'\n\n☞ Path: <code>{rclonePath}</code>'
+                msg += f'\n\n☞ Path: <code>{rclonePath}</code>'
                 await sendMessage(self.message, msg)
                 if self.logMessage:
                     await sendMessage(self.logMessage, msg)
