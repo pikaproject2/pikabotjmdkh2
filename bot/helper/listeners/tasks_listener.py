@@ -371,7 +371,7 @@ class MirrorLeechListener:
             msg += f'\n<b>☞ Total Files</b>: {folders}'
             msg += f"\n<b>☞ Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
             if typ != 0:
-                msg += f'\n<b>☞ Corrupted Files</b>: {typ}'
+                msg += f'\n<b>☞ Corrupted Files</b>: {mime_type}'
             #msg += f"\n<b>Upload</b>: {self.extra_details['mode']}"
             msg += f'\n\n<b>☞ Leech_By</b>: {self.tag}'
             if not files:
