@@ -644,6 +644,9 @@ class GoogleDriveHelper:
 
         return telegraph_content, contents_no
 
+        path = [async_to_sync(telegraph.create_page, title='Mirror-Leech-Bot Drive Search',
+                content=content)["path"] for content in telegraph_content]
+
     def count(self, link):
         try:
             file_id = self.getIdFromUrl(link)
