@@ -367,13 +367,13 @@ class MirrorLeechListener:
             await DbManger().rm_complete_task(self.message.link)
         LOGGER.info(f'Task Done: {name}')
         if self.isLeech:
-            msg = f'<b>Name</b>: <code>{escape(name)}</code>\n\n<b>Size</b>: {get_readable_file_size(size)}'
-            msg += f'\n<b>Total Files</b>: {folders}'
-            msg += f"\n<b>Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
-            if mime_type != 0:
-                msg += f'\n<b>Corrupted Files</b>: {mime_type}'
-            msg += f'\n<b>#cc</b>: {self.tag}'
-            msg += f"\n<b>Upload</b>: {self.extra_details['mode']}\n\n"
+            msg = f'<b>_____《🐱 Pik4Bot 🐱》_____</b>\n\n<b>☞ Name</b>: <code>{escape(name)}</code>\n<b>☞ Size</b>: {get_readable_file_size(size)}'
+            msg += f'\n<b>☞ Total Files</b>: {folders}'
+            msg += f"\n<b>☞ Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
+            if typ != 0:
+                msg += f'\n<b>☞ Corrupted Files</b>: {typ}'
+            #msg += f"\n<b>Upload</b>: {self.extra_details['mode']}"
+            msg += f'\n\n<b>☞ Leech_By</b>: {self.tag}'
             if not files:
                 await sendMessage(self.message, msg)
                 if self.logMessage:
@@ -389,7 +389,7 @@ class MirrorLeechListener:
                 buttons = ButtonMaker()
                 buttons = extra_btns(buttons)
                 if self.isSuperGroup and not self.message.chat.has_protected_content:
-                    buttons.ibutton('Save This Message', 'save', 'footer')
+                    buttons.ibutton('💾 Save This Message', 'save', 'footer')
                 for index, (link, name) in enumerate(files.items(), start=1):
                     fmsg += f"{index}. <a href='{link}'>{name}</a>\n"
                     if len(fmsg.encode() + msg.encode()) > 4000:
@@ -412,25 +412,26 @@ class MirrorLeechListener:
                 return
         else:
             if SHORTENERES:
-                msg = f'<b>Name</b>: <code>.{escape(name).replace(" ", "-").replace(".", ",")}</code>\n\n<b>Size</b>: {get_readable_file_size(size)}'
+                msg = f'<b>_____《🐱 Pik4Bot 🐱》_____</b>\n\n<b>☞ Name</b>: <code>.{escape(name).replace(" ", "-").replace(".", ",")}</code>\n<b>☞ Size</b>: {get_readable_file_size(size)}'
             else:
-                msg = f'<b>Name</b>: <code>{escape(name)}</code>\n\n<b>Size</b>: {get_readable_file_size(size)}'
-            msg += f'\n\n<b>Type: </b>{mime_type}'
-            if mime_type == "Folder":
-                msg += f'\n<b>SubFolders: </b>{folders}'
-                msg += f'\n<b>Files: </b>{files}'
-            msg += f'\n\n<b>#cc</b>: {self.tag} | <b>Elapsed</b>: {get_readable_time(time() - self.extra_details["startTime"])}'
-            msg += f"\n\n<b>Upload</b>: {self.extra_details['mode']}"
+                msg = f'<b>_____《🐱 Pik4Bot 🐱》_____</b>\n\n<b>☞ Name</b>: <code>{escape(name)}</code>\n<b>☞ Size</b>: {get_readable_file_size(size)}'
+            msg += f'\n<b>☞ Type: </b>{typ}'
+            if typ == "Folder":
+                msg += f'\n<b>☞ SubFolders: </b>{folders}'
+                msg += f'\n<b>☞ Files: </b>{files}'
+            #msg += f"\n<b>Upload</b>: {self.extra_details['mode']}"
+            msg += f'\n<b>☞ Elapsed</b>: {get_readable_time(time() - self.extra_details["startTime"])}'
+            msg += f'\n\n<b>☞ Task_By</b>: {self.tag}'
             if link or rclonePath and config_dict['RCLONE_SERVE_URL']:
                 if drive_id and config_dict['GDRIVE_ID'] != drive_id:
-                    msg += f"\n\n<b>Folder id</b>: <code>{drive_id}</code>"
+                    msg += f"\n\n<b>☞ Folder id</b>: <code>{drive_id}</code>"
                 buttons = ButtonMaker()
                 if link:
                     if not config_dict['DISABLE_DRIVE_LINK']:
                         link = await sync_to_async(short_url, link)
-                        buttons.ubutton("🔐 Drive Link", link)
+                        buttons.ubutton("☁️ Google Drive", link)
                 else:
-                    msg += f'\n\nPath: <code>{rclonePath}</code>'
+                    msg += f'\n\n☞ Path: <code>{rclonePath}</code>'
                 if rclonePath and (RCLONE_SERVE_URL := config_dict['RCLONE_SERVE_URL']):
                     remote, path = rclonePath.split(':', 1)
                     url_path = url_quote(f'{path}')
@@ -462,15 +463,15 @@ class MirrorLeechListener:
                     await sendMessage(self.dmMessage, msg, buttons.build_menu(2))
                 else:
                     if self.isSuperGroup and not self.message.chat.has_protected_content:
-                        buttons.ibutton("Save This Message", 'save', 'footer')
+                        buttons.ibutton("💾 Save This Message", 'save', 'footer')
                     await sendMessage(self.message, msg, buttons.build_menu(2))
                 if self.logMessage:
                     if link and config_dict['DISABLE_DRIVE_LINK']:
                         link = await sync_to_async(short_url, link)
-                        buttons.ubutton("🔐 Drive Link", link, 'header')
+                        buttons.ubutton("☁️ Google Drive", link, 'header')
                     await sendMessage(self.logMessage, msg, buttons.build_menu(2))
             else:
-                msg += f'\n\nPath: <code>{rclonePath}</code>'
+                             msg += f'\n\n☞ Path: <code>{rclonePath}</code>'
                 await sendMessage(self.message, msg)
                 if self.logMessage:
                     await sendMessage(self.logMessage, msg)
@@ -509,8 +510,8 @@ class MirrorLeechListener:
             count = len(download_dict)
             if self.uid in self.sameDir:
                 self.sameDir.remove(self.uid)
-        msg = f"{self.tag} Download: {escape(error)}\n<b>Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
-        msg += f"\n<b>Upload</b>: {self.extra_details['mode']}"
+        msg = f"<b>☞</b> {self.tag} {escape(error)}\n\n<b>☞ Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
+        msg += f"\n<b>☞</b> <b>Upload</b>: {self.extra_details['mode']}"
         await sendMessage(self.message, msg, button)
         if self.logMessage:
             await sendMessage(self.logMessage, msg, button)
@@ -551,8 +552,8 @@ class MirrorLeechListener:
             count = len(download_dict)
             if self.uid in self.sameDir:
                 self.sameDir.remove(self.uid)
-        msg = f"{self.tag} {escape(error)}\n<b>Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
-        msg += f"\n<b>Upload</b>: {self.extra_details['mode']}"
+         msg = f"<b>☞</b> {self.tag} {escape(error)}\n\n<b>☞ Elapsed</b>: {get_readable_time(time() - self.extra_details['startTime'])}"
+        msg += f"\n<b>☞</b> <b>Upload</b>: {self.extra_details['mode']}"
         await sendMessage(self.message, msg)
         if self.logMessage:
             await sendMessage(self.logMessage, msg)
